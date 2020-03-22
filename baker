@@ -1,5 +1,7 @@
 #!/bin/bash
 #Baker, tool to bak up, un-bak, and flop baks
+#By: Tom Dale
+
 #Prechecks
 if [ $# -eq 0 ]; then
     echo "No arguments provided"
@@ -19,10 +21,8 @@ else
 	OTH="$(echo "$1" | sed -e 's/\(.bak\)*$//g')"
 fi
 
-echo "ARG= $ARG and OTH= $OTH"
-##TODO finish logic
 # Flop baks
-if [ -f ARG  && -f OTH ]; then
+if [ -f $ARG ]  && [ -f $OTH ]; then
 	mv $ARG /tmp/baker-$ARG 
 	mv $OTH $ARG
 	mv /tmp/baker-$ARG $OTH
@@ -30,9 +30,5 @@ if [ -f ARG  && -f OTH ]; then
 fi
 
 # un-bak or bak
-if [ $1 == ".bak" ]; then ; #restore bak file
-	mv $1 $1
-	exit 0
-else ; #bak up file
-	mv $1 $1.bak
+mv $ARG $OTH
 
