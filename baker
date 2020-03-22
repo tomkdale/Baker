@@ -1,25 +1,26 @@
 #!/bin/bash
-
 #Baker, tool to bak up, un-bak, and flop baks
 #Prechecks
 if [ $# -eq 0 ]; then
     echo "No arguments provided"
     exit 1
 fi
-if [! -f $1]; then
-	echo "File does not exist"
+if [ ! -f $1 ]; then
+	echo "$PWD/$1 does not exist"
 	exit 1
 fi
 	
 #Set Vars
-if [ $1 == ".bak" ]; then
+if [ ${1: -4} != ".bak" ]; then
 	ARG=$1
 	OTH=$1.bak  ; # other is backup
 else
 	ARG=$1
-	OTH=$1-bak ; # other is normal
+	OTH="$(echo "$1" | sed -e 's/\(.bak\)*$//g')"
 fi
 
+echo "ARG= $ARG and OTH= $OTH"
+##TODO finish logic
 # Flop baks
 if [ -f ARG  && -f OTH ]; then
 	mv $ARG /tmp/baker-$ARG 
