@@ -4,21 +4,26 @@
 
 #Prechecks
 if [ $# -eq 0 ]; then
-    echo "No arguments provided"
+				echo "baker: missing file operand(s)"
+				echo "Try 'baker --help' for more information."
     exit 1
 fi
-if [ ! -f $1 ]; then
-	echo "$PWD/$1 does not exist"
+
+if [ ! -f "$1" ]; then
+	echo "/"$PWD/$1"/ file not found."
 	exit 1
 fi
 	
 #Set Vars
-if [ ${1: -4} != ".bak" ]; then
+if [ "${1: -4}" != ".bak" ]; then
 	ARG=$1
-	OTH=$1.bak  ; # other is backup
+	OTH=.$1.bak  ; # other is backup
 else
 	ARG=$1
 	OTH="$(echo "$1" | sed -e 's/\(.bak\)*$//g')"
+	if [[ "$1" == .* ]]; then
+		OTH="$(echo "$OTH" | sed 's/^.//')"
+  fi
 fi
 
 # Flop baks

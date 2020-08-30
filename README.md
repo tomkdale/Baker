@@ -1,5 +1,13 @@
 #  Baker tool
 Quick and easy tool to move files to bak, un-bak, and bak flop files.
 
-Move script to path and just run `baker <filename>`.  This will either make the file into a backup, move a backup to original, or switch the existing backup and current file. 
+
+ ## Installation
+Clone this repo then move the script to your path and just run `baker <filename>`.  
+
+## Basic Use
+
+* Run `baker foo` to move `foo` to baker file `.foo.bak`
+* Run `baker .foo.bak` to move `.foo.bak` to `foo`
+* Run `baker foo` while a `.foo.bak` already exists and the two files will swap places.
 
